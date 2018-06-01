@@ -9,9 +9,13 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	User.find({}, (err, docs) => {
-		res.send(docs);
-	});
+	User.find({})
+		.then(docs => {
+			res.send(docs);
+		})
+		.catch(err => {
+			res.send(err);
+		});
 });
 
 router.post('/', (req, res) => {
@@ -19,11 +23,14 @@ router.post('/', (req, res) => {
 
 	const user = new User(body);
 
-	user.save((err, doc) => {
-		if (err) return res.send(err);
-
-		res.send(doc);
-	});
+	user
+		.save()
+		.then((err, doc) => {
+			res.send(doc);
+		})
+		.catch(err => {
+			res.send(err);
+		});
 });
 
 router.get('/me', authenticate, (req, res) => {
@@ -65,9 +72,11 @@ router.patch('/me', authenticate, (req, res) => {
 });
 
 router.delete('/me', authenticate, (req, res) => {
-	User.findOneAndRemove({ _id: req.user._id }, (err, doc) => {
-		res.send(doc);
-	});
+	User.findOneAndRemove({ _id: req.user._id })
+		.then(doc => {
+			res.send(doc);
+		})
+		.catch(err => res.send(err));
 });
 
 module.exports = router;
