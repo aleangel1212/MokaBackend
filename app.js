@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: 0 */
+
 const express = require('express');
 const mongoose = require('./db/mongoose');
 const bodyParser = require('body-parser');
