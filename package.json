@@ -1,0 +1,19 @@
+{
+  "name": "MokaBackend",
+  "version": "1.0.0",
+  "description": "Backend for Moka coffee machine",
+  "main": "app.js",
+  "repository": "https://github.com/aleangel1212/MokaBackend.git",
+  "author": "Alessandro Vecchi <aleangel1212@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.2",
+    "lodash": "^4.17.10",
+    "mongoose": "^5.1.3"
+  }
+}
