@@ -21,6 +21,8 @@ const UserSchema = new mongoose.Schema({
 
   cards: [
     {
+      _id: false,
+
       nameOnCard: {
         type: String,
         required: true
@@ -45,6 +47,8 @@ const UserSchema = new mongoose.Schema({
 
   cups: [
     {
+      _id: false,
+
       uid: {
         type: String,
         required: true
@@ -59,6 +63,8 @@ const UserSchema = new mongoose.Schema({
 
   prefs: [
     {
+      _id: false,
+
       type: {
         type: String,
         required: true
