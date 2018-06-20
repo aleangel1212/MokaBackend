@@ -16,8 +16,8 @@ router.post('/login', (req, res) => {
 
 			res.send({ token });
 		})
-		.catch(err => {
-			res.send(err);
+		.catch(error => {
+			res.status(400).send(error);
 		});
 });
 

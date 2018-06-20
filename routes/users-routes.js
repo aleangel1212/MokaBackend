@@ -25,8 +25,10 @@ router.post('/', (req, res) => {
 
 	user
 		.save()
-		.then((err, doc) => {
-			res.send(doc);
+		.then(doc => {
+			const token = doc.generateAuthToken();
+
+			res.send({ token });
 		})
 		.catch(err => {
 			res.send(err);
@@ -44,7 +46,7 @@ router.patch('/me', authenticate, (req, res) => {
 		'password',
 		'cups',
 		'prefs',
-		'cards'
+		'cards',
 	]);
 
 	if (update.password) {
@@ -52,17 +54,9 @@ router.patch('/me', authenticate, (req, res) => {
 		update.password = bcrypt.hashSync(update.password, salt);
 	}
 
-	User.findOneAndUpdate(
-		{
-			_id: req.user._id
-		},
-		{
-			$set: update
-		},
-		{
-			new: true
-		}
-	)
+	const options = { new: true };
+
+	User.findOneAndUpdate({ _id: req.user._id }, { $set: update }, options)
 		.then(doc => {
 			res.send(doc);
 		})

@@ -6,17 +6,17 @@ const _ = require('lodash');
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
 
   email: {
     type: String,
-    required: true
+    required: true,
   },
 
   password: {
     type: String,
-    required: true
+    required: true,
   },
 
   cards: [
@@ -25,24 +25,24 @@ const UserSchema = new mongoose.Schema({
 
       nameOnCard: {
         type: String,
-        required: true
+        required: true,
       },
 
       billingAddress: {
         type: String,
-        required: true
+        required: true,
       },
 
       expDate: {
         type: Date,
-        required: true
+        required: true,
       },
 
       cvc: {
         type: String,
-        required: true
-      }
-    }
+        required: true,
+      },
+    },
   ],
 
   cups: [
@@ -51,14 +51,14 @@ const UserSchema = new mongoose.Schema({
 
       uid: {
         type: String,
-        required: true
+        required: true,
       },
 
       size: {
         type: Number,
-        required: true
-      }
-    }
+        required: true,
+      },
+    },
   ],
 
   prefs: [
@@ -67,22 +67,22 @@ const UserSchema = new mongoose.Schema({
 
       type: {
         type: String,
-        required: true
+        required: true,
       },
 
       cream: {
         type: Number,
-        default: 0
+        default: 0,
       },
 
       sugar: {
         type: Number,
-        default: 0
-      }
-    }
+        default: 0,
+      },
+    },
   ],
 
-  tokens: [String]
+  tokens: [String],
 });
 
 UserSchema.statics.findByToken = function(token) {
@@ -100,14 +100,14 @@ UserSchema.statics.findByToken = function(token) {
     User.findOne(
       {
         _id: decoded._id,
-        tokens: token
+        tokens: token,
       },
       (err, doc) => {
         if (!doc) return reject({ error: 'Please login' });
         if (err) return reject(err);
 
         resolve(doc);
-      }
+      },
     );
   });
 };
@@ -136,8 +136,8 @@ UserSchema.methods.generateAuthToken = function() {
 UserSchema.methods.removeToken = function(token) {
   return this.update({
     $pull: {
-      tokens: token
-    }
+      tokens: token,
+    },
   });
 };
 
