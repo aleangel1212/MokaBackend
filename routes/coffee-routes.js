@@ -8,14 +8,17 @@ router.get('/:cupId', (req, res) => {
 	User.findOne({
 		cups: {
 			$elemMatch: {
-				uid: req.params.cupId
-			}
-		}
+				uid: req.params.cupId,
+			},
+		},
 	})
 		.then(doc => {
 			if (!doc) return res.send({ error: 'No cup found' });
 
-			res.send(doc.prefs[0]);
+			const retVal = doc.prefs[0];
+			retVal.size = doc.cups[0].size;
+
+			res.send(retVal);
 		})
 		.catch(err => {
 			res.send(err);
