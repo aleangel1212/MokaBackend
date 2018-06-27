@@ -15,8 +15,14 @@ router.get('/:cupId', (req, res) => {
 		.then(doc => {
 			if (!doc) return res.send({ error: 'No cup found' });
 
-			const retVal = doc.prefs[0];
-			retVal.size = doc.cups[0].size;
+			const foundCup = doc.cups.find(cup => cup.uid === req.params.cupId);
+
+			const retVal = {
+				type: doc.prefs[0].type,
+				cream: doc.prefs[0].cream,
+				sugar: doc.prefs[0].sugar,
+				size: foundCup.size,
+			}
 
 			res.send(retVal);
 		})
