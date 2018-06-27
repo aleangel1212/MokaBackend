@@ -54,6 +54,11 @@ const UserSchema = new mongoose.Schema({
         required: true,
       },
 
+      name: {
+        type: String,
+        required: true,
+      },
+
       size: {
         type: Number,
         required: true,
