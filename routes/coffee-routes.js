@@ -17,14 +17,13 @@ router.get('/:cupId', (req, res) => {
 
 			const foundCup = doc.cups.find(cup => cup.uid === req.params.cupId);
 
-			const retVal = {
+			const response = {
 				type: doc.prefs[0].type,
 				cream: doc.prefs[0].cream,
-				sugar: doc.prefs[0].sugar,
 				size: foundCup.size,
-			}
+			};
 
-			res.send(retVal);
+			res.send(response);
 		})
 		.catch(err => {
 			res.send(err);
