@@ -13,7 +13,7 @@ router.get('/:cupId', (req, res) => {
 		},
 	})
 		.then(doc => {
-			if (!doc) return res.send({ error: 'No cup found' });
+			if (!doc) return res.send({ error: 1 });
 
 			const foundCup = doc.cups.find(cup => cup.uid === req.params.cupId);
 
